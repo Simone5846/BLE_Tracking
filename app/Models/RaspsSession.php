@@ -7,6 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Seld\PharUtils\Timestamps;
 
+/**
+ * @property int $id
+ * @property int device_id
+ * @property string rssi
+ * @property \Carbon\Carbon $started_at
+ * @property \Carbon\Carbon|null $ended_at
+ * @property \Carbon\Carbon|null $created_at
+ * @property-read \App\Models\RaspsDatum[]|\Illuminate\Support\Collection $rasps_data
+ */
 class RaspsSession extends Model
 {
     use HasFactory;
