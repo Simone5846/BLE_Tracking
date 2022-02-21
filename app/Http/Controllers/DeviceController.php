@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Device;
 use App\Models\RaspsDatum;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\Process\Process;
@@ -147,7 +148,13 @@ class DeviceController extends Controller
         $dev = DB::table('data_from_rasps')->select('mac', 'rssi')->where($device, '=', $deviceID)->get();
         dd($dev);*/
 
-        $time = RaspsDatum::where('mac', 'C4:A5:DF:24:05:7E')->get()->pluck('rssi', 'created_at');
+
+        $time = RaspsDatum::whereHas('rasps_session', function (Builder $session) {
+            $session->whereHas('device', function (Builder $device) {
+                $device->where('mac_addr', 'C4:A5:DF:24:05:7E');
+            });
+        })->get()->pluck('rssi', 'created_at');
+
         return view('backend.auth.user.singleDevice', compact("time"));
 
     }
