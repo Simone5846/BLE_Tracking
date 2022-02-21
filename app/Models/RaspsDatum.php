@@ -19,11 +19,7 @@ class RaspsDatum extends Model
     use HasFactory;
 
     protected $table = 'rasps_data';
-
-    protected $primaryKey = 'id';
-
     protected $fillable = ['mac', 'rssi'];
-
     protected $dates = ['created_at'];
 
     public function rasps_session(): BelongsTo
