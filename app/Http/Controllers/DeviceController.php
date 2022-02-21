@@ -123,10 +123,10 @@ class DeviceController extends Controller
         $m_data = $request->get('m_data');
         $r_data = $request->get('r_data');
         RaspsDatum::create(['mac' => $m_data, 'rssi' => $r_data]);
-        if(($m_data == 'C4:A5:DF:24:05:7E') and Device::where('mac_addr', $request->m_data)->doesntExist()){
+        if(($m_data == 'C4:A5:DF:24:05:7E') and Device::where('mac_addr', $m_data)->doesntExist()){
             Device::create(['username'=>'Device1','mac_addr' => $m_data]);
         }
-        if(($m_data == '70:1C:E7:E4:71:DA') and Device::where('mac_addr', $request->m_data)->doesntExist()){
+        if(($m_data == '70:1C:E7:E4:71:DA') and Device::where('mac_addr', $m_data)->doesntExist()){
             Device::create(['username' => 'Device2','mac_addr' => $m_data]);
         }
     }
