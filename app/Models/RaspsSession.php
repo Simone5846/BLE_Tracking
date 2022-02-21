@@ -4,13 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Seld\PharUtils\Timestamps;
 
 /**
  * @property int $id
- * @property int device_id
- * @property string rssi
+ * @property int $device_id
+ * @property string $rssi
+ * @property-read \App\Models\Device $device
  * @property \Carbon\Carbon $started_at
  * @property \Carbon\Carbon|null $ended_at
  * @property \Carbon\Carbon|null $created_at
@@ -31,5 +33,10 @@ class RaspsSession extends Model
     public function rasps_data(): HasMany
     {
         return $this->hasMany(RaspsDatum::class, 'rasps_session_id');
+    }
+
+    public function device(): BelongsTo
+    {
+        return $this->belongsTo(Device::class, 'device_id');
     }
 }
