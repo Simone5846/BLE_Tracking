@@ -15,9 +15,13 @@ class CreateDataFromRaspsTable extends Migration
     {
         Schema::create('data_from_rasps', function (Blueprint $table) {
             $table->id();
-            $table->string('mac_addr')->nullable();
+            $table->unsignedBigInteger('device_id');
             $table->integer('rssi')->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('data_from_rasps', function (Blueprint $table) {
+            $table->foreign('device_id')->references('id')->on('devices');
         });
     }
 
@@ -28,6 +32,9 @@ class CreateDataFromRaspsTable extends Migration
      */
     public function down()
     {
+        Schema::table('data_from_rasps', function (Blueprint $table) {
+           $table->dropForeign('data_from_rasps_device_id_foreign');
+        });
         Schema::dropIfExists('data_from_rasps');
     }
 }
