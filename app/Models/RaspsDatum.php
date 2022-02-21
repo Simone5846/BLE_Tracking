@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Seld\PharUtils\Timestamps;
 
-class DataFromRasp extends Model
+class RaspsDatum extends Model
 {
     use HasFactory;
 

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDataFromRaspsSessionsTable extends Migration
+class CreateRaspsSessionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateDataFromRaspsSessionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('data_from_rasps_sessions', function (Blueprint $table) {
+        Schema::create('rasps_sessions', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('device_id');
             $table->dateTime('started_at');
@@ -21,7 +21,7 @@ class CreateDataFromRaspsSessionsTable extends Migration
             $table->timestamps();
         });
 
-        Schema::table('data_from_rasps_sessions', function (Blueprint $table) {
+        Schema::table('rasps_sessions', function (Blueprint $table) {
             $table->foreign('device_id')->references('id')->on('devices');
         });
     }
@@ -33,7 +33,7 @@ class CreateDataFromRaspsSessionsTable extends Migration
      */
     public function down()
     {
-        Schema::table('data_from_rasps_sessions', function (Blueprint $table) {
+        Schema::table('rasps_sessions', function (Blueprint $table) {
            $table->dropForeign('data_from_rasps_device_id_foreign');
         });
         Schema::dropIfExists('data_from_rasps_sessions');

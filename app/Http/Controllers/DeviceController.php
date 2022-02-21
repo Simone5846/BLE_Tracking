@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Device;
-use App\Models\DataFromRasp;
+use App\Models\RaspsDatum;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\Process\Process;
@@ -110,7 +110,7 @@ class DeviceController extends Controller
      */
     public function visualizeData()
     {
-        $data=DataFromRasp::paginate(10);
+        $data=RaspsDatum::paginate(10);
         return view('backend.auth.user.dictionary', compact("data"));
     }
 
@@ -122,7 +122,7 @@ class DeviceController extends Controller
     {
         $m_data = $request->get('m_data');
         $r_data = $request->get('r_data');
-        DataFromRasp::create(['mac' => $m_data, 'rssi' => $r_data]);
+        RaspsDatum::create(['mac' => $m_data, 'rssi' => $r_data]);
         if(($m_data == 'C4:A5:DF:24:05:7E') and Device::where('mac_addr', $request->m_data)->doesntExist()){
             Device::create(['username'=>'Device1','mac_addr' => $m_data]);
         }
@@ -147,7 +147,7 @@ class DeviceController extends Controller
         $dev = DB::table('data_from_rasps')->select('mac', 'rssi')->where($device, '=', $deviceID)->get();
         dd($dev);*/
 
-        $time = DataFromRasp::where('mac', 'C4:A5:DF:24:05:7E')->get()->pluck('rssi', 'created_at');
+        $time = RaspsDatum::where('mac', 'C4:A5:DF:24:05:7E')->get()->pluck('rssi', 'created_at');
         return view('backend.auth.user.singleDevice', compact("time"));
 
     }
