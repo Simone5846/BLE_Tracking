@@ -12,6 +12,6 @@ class DataFromRasp extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = ['MAC', 'RSSI'];
+    protected $fillable = ['mac', 'rssi'];
 
 }

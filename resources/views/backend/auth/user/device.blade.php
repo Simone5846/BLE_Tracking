@@ -6,7 +6,7 @@
   <thead>
     <tr>
       <th scope="col">ID</th>
-      <th scope="col">USERNAME</th>
+      <th scope="col">username</th>
       <th scope="col">MAC ADDRESS</th>
     </tr>
   </thead>
@@ -14,8 +14,8 @@
     @foreach ($data as $item)
     <tr>
       <th scope="row">{{$item->id}}</th>
-      <td>{{$item->USERNAME}}</td>
-      <td>{{$item->MAC_ADDR}}</td>
+      <td>{{$item->username}}</td>
+      <td>{{$item->mac_addr}}</td>
       <td>
          <a href="{{ url('admin/singleDevice/'.$item->id) }}" class="btn btn-primary">Select</a>
       </td>

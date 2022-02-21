@@ -15,7 +15,7 @@ class DeviceController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
-     * 
+     *
      * For registered devices
      */
 
@@ -33,7 +33,7 @@ class DeviceController extends Controller
      */
     public function create()
     {
-        
+
     }
 
     /**
@@ -42,10 +42,10 @@ class DeviceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    
+
     public function store(Request $request)
     {
-        
+
     }
 
     /**
@@ -100,15 +100,15 @@ class DeviceController extends Controller
 
     public function showDev(Device $deviceID)
     {
-        
+
     }
 
     /**
      * Displays all data present in the table data_from_rasps
-     * 
-     * The data are all the devices that the raspberry can capture 
+     *
+     * The data are all the devices that the raspberry can capture
      */
-    public function visualizeData() 
+    public function visualizeData()
     {
         $data=DataFromRasp::paginate(10);
         return view('backend.auth.user.dictionary', compact("data"));
@@ -119,15 +119,15 @@ class DeviceController extends Controller
      * table of the same DB the MAC addresses of interest
      */
     public function getData(Request $request)
-    {   
+    {
         $m_data = $request->get('m_data');
         $r_data = $request->get('r_data');
-        DataFromRasp::create(['MAC' => $m_data, 'RSSI' => $r_data]);
-        if(($m_data == 'C4:A5:DF:24:05:7E') and Device::where('MAC_ADDR', $request->m_data)->doesntExist()){ 
-            Device::create(['USERNAME'=>'Device1','MAC_ADDR' => $m_data]);
+        DataFromRasp::create(['mac' => $m_data, 'rssi' => $r_data]);
+        if(($m_data == 'C4:A5:DF:24:05:7E') and Device::where('mac_addr', $request->m_data)->doesntExist()){
+            Device::create(['username'=>'Device1','mac_addr' => $m_data]);
         }
-        if(($m_data == '70:1C:E7:E4:71:DA') and Device::where('MAC_ADDR', $request->m_data)->doesntExist()){ 
-            Device::create(['USERNAME' => 'Device2','MAC_ADDR' => $m_data]);
+        if(($m_data == '70:1C:E7:E4:71:DA') and Device::where('mac_addr', $request->m_data)->doesntExist()){
+            Device::create(['username' => 'Device2','mac_addr' => $m_data]);
         }
     }
 
@@ -139,16 +139,16 @@ class DeviceController extends Controller
         return redirect()->route('dict');
     }
 
-    public function FirstDev(Device $deviceID){        
+    public function FirstDev(Device $deviceID){
         /*$device = Device::firstWhere('id', $deviceID);
-        $dev = DB::table('data_from_raps')->select('MAC', 'RSSI')->get();
+        $dev = DB::table('data_from_raps')->select('mac', 'rssi')->get();
         return view('backend.auth.user.singleDevice', compact("dev"));
 
-        $dev = DB::table('data_from_rasps')->select('MAC', 'RSSI')->where($device, '=', $deviceID)->get();
+        $dev = DB::table('data_from_rasps')->select('mac', 'rssi')->where($device, '=', $deviceID)->get();
         dd($dev);*/
 
-        $time = DataFromRasp::where('MAC', 'C4:A5:DF:24:05:7E')->get()->pluck('RSSI', 'created_at');
+        $time = DataFromRasp::where('mac', 'C4:A5:DF:24:05:7E')->get()->pluck('rssi', 'created_at');
         return view('backend.auth.user.singleDevice', compact("time"));
-        
+
     }
 }

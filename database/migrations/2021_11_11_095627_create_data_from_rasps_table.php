@@ -15,8 +15,8 @@ class CreateDataFromRaspsTable extends Migration
     {
         Schema::create('data_from_rasps', function (Blueprint $table) {
             $table->id();
-            $table->string('MAC')->nullable();
-            $table->integer('RSSI')->nullable();
+            $table->string('mac_addr')->nullable();
+            $table->integer('rssi')->nullable();
             $table->timestamps();
         });
     }

@@ -28,6 +28,6 @@ class Device extends Model
      *
      * @var array
      */
-    protected $fillable = ['USERNAME', 'MAC_ADDR'];
+    protected $fillable = ['username', 'mac_addr'];
     protected $time;
 }

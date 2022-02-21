@@ -19,8 +19,8 @@
         @foreach ($data as $item)
         <tr>
             <th scope="row">{{$item->id}}</th>
-            <td>{{$item->MAC}}</td>
-            <td>{{$item->RSSI}}</td>
+            <td>{{$item->mac}}</td>
+            <td>{{$item->rssi}}</td>
         </tr>
         @endforeach
     </tbody>
