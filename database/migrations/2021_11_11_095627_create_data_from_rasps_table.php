@@ -15,13 +15,13 @@ class CreateDataFromRaspsTable extends Migration
     {
         Schema::create('data_from_rasps', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('device_id');
+            $table->unsignedBigInteger('session_id');
             $table->integer('rssi')->nullable();
             $table->timestamps();
         });
 
         Schema::table('data_from_rasps', function (Blueprint $table) {
-            $table->foreign('device_id')->references('id')->on('devices');
+            $table->foreign('session_id')->references('id')->on('data_from_rasps_sessions');
         });
     }
 
